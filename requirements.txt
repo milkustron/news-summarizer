@@ -1,5 +1,12 @@
 # preprocessing: Python 3.11.5
-sklearn==1.4.2
+scikit-learn==1.4.2
 nltk==3.8.1
 pandas==2.2.3
 numpy==1.26.0
+gensim==4.2.0
+datasets==3.2.0
+transformers==4.47.1
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
+accelerate==1.2.1

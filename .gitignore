@@ -1,1 +1,5 @@
 data
+/tokenized_data/
+/results
+.idea
+.ipynb_checkpoints
