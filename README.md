@@ -1,45 +1,9 @@
 # NewsRoom Dataset
 
-## Dataset Download
-Ze względu na duży rozmiar plików (łącznie około 5.5GB), dataset jest dostępny do pobrania z Google Drive:
-[Link do pobrania datasetu](https://drive.google.com/file/d/1E6ZBbN-5PGwqWdJ3Mnik7fDBtUaISKMi/view?usp=sharing)
-
-
-### Statystyki:
+## Statystyki:
 - Train dataset: 995,041 przykładów
 - Dev/Validation dataset: 108,837 przykładów 
 - Test dataset: 108,862 przykładów
-
-## Instrukcja użycia
-
-### 1. Pobieranie i przygotowanie danych:
-```bash
-# Po pobraniu z Google Drive:
-unzip newsroom_dataset.zip
-cat train_part_* > train.jsonl
-cat dev_part_* > dev.jsonl
-cat test_part_* > test.jsonl
-```
-
-### 2. Używanie datasetu w Python:
-```python
-# Instalacja wymaganych bibliotek
-pip install datasets
-
-# Utworzenie folderu na dataset
-import os
-os.makedirs("~/.manual_dirs/newsroom", exist_ok=True)
-
-# Przeniesienie plików .jsonl do utworzonego folderu
-# Załadowanie datasetu
-from datasets import load_dataset
-dataset = load_dataset("newsroom", data_dir="~/.manual_dirs/newsroom")
-
-# Sprawdzenie zawartości
-print(f"Liczba przykładów w zbiorze treningowym: {len(dataset['train'])}")
-print(f"Liczba przykładów w zbiorze walidacyjnym: {len(dataset['validation'])}")
-print(f"Liczba przykładów w zbiorze testowym: {len(dataset['test'])}")
-```
 
 ## Struktura danych
 Każdy rekord w datasecie zawiera:
@@ -55,3 +19,20 @@ Każdy rekord w datasecie zawiera:
 - `coverage_bin`: extractive/abstractive
 - `compression_bin`: low/medium/high
 
+## Instrukcja użycia - wersja uproszczona
+1. Pobrać wytrenowane dane z [Link](https://pejot-my.sharepoint.com/:u:/g/personal/s15259_pjwstk_edu_pl/EeJGYUm82pRAvKFKG5S6Y34BgJo1D5ADzxdoemXPZKMBgA?e=BJfsx2) i umieścić katalogu `./fine_tuned_bart`
+2. Uruchomić dashboard za pomocą komendy `streamlit run .\app.py`
+
+## Instrukcja użycia - pełny proces
+1. Pobrac dane z: [Link](https://drive.google.com/file/d/1E6ZBbN-5PGwqWdJ3Mnik7fDBtUaISKMi/view?usp=sharing) i umieścić wszystkie pliki w katalogu pod ścieżka `./data`
+2. Wywołać w konsoli komende `python prepare_downloaded_data.py` - dane zostaną złączone do jednego pliku
+3. Wykonać wszystkie kroki z notatnika `text_summarization_word2vec.ipynb` - Trenowanie modelu word2vec
+4. Wykonać wszystkie kroki z notatnika `text_summarizaiton_bart.ipynb` - Trenowanie modelu bart
+5. Wykonać wszystkie kroki z notatnika `get_evals_w2v.ipynb` - zbieranie danych do porównania dla modelu word2vec
+6. Wykonać wszystkie kroki z notatnika `get_evals_bert.ipynb` - zbieranie danych do porównania dla modelu bart
+7. Wykonać wszystkie kroki z notatnika `compare_models.ipynb` - porównanie obu modeli
+8. Uruchomić dashboard za pomocą komendy `streamlit run .\app.py`
+
+
+## Demo
+https://www.loom.com/share/ba21a31818204f4a96adce56b8f38893?sid=bf6822d2-05a3-42e5-a713-0c9ba6f8fc32

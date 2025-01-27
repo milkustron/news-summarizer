@@ -19,7 +19,7 @@ nltk.download('punkt')
 nltk.download('wordnet')
 lemmatizer = WordNetLemmatizer()
 
-def summarize_text_bert(text, trained_model):
+def summarize_text_bart(text, trained_model):
     """Generate a summary for the given text."""
     inputs = tokenizer(text, max_length=1024, return_tensors="pt", truncation=True).to(device)
     summary_ids = trained_model.generate(inputs["input_ids"], max_length=128, min_length=30, length_penalty=2.0, num_beams=4, early_stopping=True)
